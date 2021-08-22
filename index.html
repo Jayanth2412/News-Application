@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>News Updates</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-black bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand bg-white text-dark" href="#"><b>B &nbsp; B &nbsp; C</b></a>
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon bg-success"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#" tabindex="-1" aria-disabled="true">Sports</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            More
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Music</a></li>
+                            <li><a class="dropdown-item" href="#">Tv</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Weather</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-sm btn-outline-secondary" type="button">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid bg-white">
+        <div class="row mt-5 mx-1">
+            <div class="col">
+                <p class="fs-4 text-secondary"><b>Welcome to BBC.com</b></p>
+            </div>
+            <div class="col">
+                <select class="form-select bg-transparent text-secondary" id="city"
+                    onchange="getWeatherData(); getCityNews();">
+                    <option selected class="text-dark">Weather Update by City</option>
+                    <option value="Bangalore" class="text-dark">Bangalore</option>
+                    <option value="Chennai" class="text-dark">Chennai</option>
+                    <option value="Hyderabad" class="text-dark">Hyderabad</option>
+                    <option value="Mumbai" class="text-dark">Mumbai</option>
+                    <option value="Delhi" class="text-dark">Delhi</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="row mx-1 g-3">
+            <div class="col-lg-6 col-sm-3">
+                <div class="card text-white">
+                    <img src="" class="card-img" id="urlToImage" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title" id="headlines">Card title</h5>
+                        <p class="card-text" id="description">This is a wider card with supporting text below as a
+                            natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-3">
+                <div class="row row-sm-2 mt-1">
+                    <div class="col-lg-6 col-sm-8">
+                        <div class="card text-white">
+                            <img src="https://source.unsplash.com/1600x900/?nature,society" class="card-img" alt="...">
+                            <div class="card-img-overlay">
+                                <h5 class="card-title" id="location"><b>Location</b></h5>
+                                <p class="fs-6 text-start text-white"><span id="temp">-------</span>
+                                    <span id="temp-unit"></span>&#8457
+                                </p>
+                                <p class="text-start" id="weatherdescription">Weather</p>
+                                <table>
+                                    <tr>
+                                        <td>Lat:</td>
+                                        <td class="text-success" id="lati">....</td>
+                                        <td>&#176</td>
+                                        <td class="ps-5">Lon:</td>
+                                        <td class="text-success" id="longi">....</td>
+                                        <td>&#176</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-8">
+                        <div class="card text-white">
+                            <img src="https://source.unsplash.com/1600x900/?nature,Sports" class="card-img" alt="...">
+                            <div class="card-img-overlay">
+                                <p class="fs-6 text-start text-light"><b>Weather Details</b></p>
+                                <table class="table table-borderless text-white">
+                                    <tr class="pt-0">
+                                        <td class="text-white">Humidity</td>
+                                        <td id="humidity">----</td>
+                                        <td>g.m</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-white">Visibility</td>
+                                        <td id="visibility">----</td>
+                                        <td>m</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="text-white">Wind Speed</td>
+                                        <td id="windspeed">----</td>
+                                        <td>&#13223</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-sm-2 my-auto mt-2">
+                    <div class="col-lg-6 col-sm-8">
+                        <div class="card text-white">
+                            <img src="" class="card-img" id="imageurl1" alt="...">
+                            <div class="card-img-overlay">
+                                <h5 class="card-title fontsize1" id="head1">Card title</h5>
+                                <a href="#" target="_blank" class="card-link" id="linkurl1">Know More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-8">
+                        <div class="card text-white h-100">
+                            <img src="" class="card-img" id="imageurl22" alt="...">
+                            <div class="card-img-overlay">
+                                <h5 class="card-title fontsize1" id="head22">Card title</h5>
+                                <a href="#" target="_blank" class="card-link" id="linkurl22">Know More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row mt-3 mb-1 mx-1">
+            <div class="col-lg-10">
+                <div class="fs-4 text-secondary"><b>News</b></div>
+            </div>
+            <div class="col-lg-2">
+                <select class="form-select bg-dark text-white" id="topic" onchange="getTopicData()">
+                    <option selected class="text-dark">Choose Topic</option>
+                    <option value="sports" class="text-white">Sports</option>
+                    <option value="politics" class="text-white">Politics</option>
+                    <option value="technology" class="text-white">Technology</option>
+                    <option value="business" class="text-white">Business</option>
+                    <option value="entertainment" class="text-white">Entertainment</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-3 mx-1">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="" class="card-img-top" id="topicimage" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" id="topictitle">Card title</h5>
+                        <p class="card-text" id="topicdescription">This is a longer card with supporting text below as a
+                            natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="" class="card-img-top" id="topicimage1" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" id="topictitle1">Card title</h5>
+                        <p class="card-text" id="topicdescription1">This is a short card.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="" class="card-img-top" id="topicimage2" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" id="topictitle2">Card title</h5>
+                        <p class="card-text" id="topicdescription2">This is a longer card with supporting text below as
+                            a natural lead-in to
+                            additional content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="" class="card-img-top" id="topicimage3" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" id="topictitle3">Card title</h5>
+                        <p class="card-text" id="topicdescription3">This is a longer card with supporting text below as
+                            a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="" class="card-img-top" id="topicimage4" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" id="topictitle4">Card title</h5>
+                        <p class="card-text" id="topicdescription4">This is a longer card with supporting text below as
+                            a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="" class="card-img-top" id="topicimage5" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" id="topictitle5">Card title</h5>
+                        <p class="card-text" id="topicdescription5">This is a longer card with supporting text below as
+                            a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid bg-secondary mt-3">
+        <div class="row pt-3">
+            <p class="fs-4 text-white"><b>Explore the BBC</b></p>
+        </div>
+        <div class="row">
+            <p class="text-start text-white fontsizeal"><b>Copyright © 2021 BBC.</b> The BBC is not responsible for the
+                content of external sites.
+                <b>Read about our approach to external linking.</b>
+            </p>
+        </div>
+    </div>
+
+
+    <script>
+        function getNewsData() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    renderUi(JSON.parse(xhr.responseText));
+                }
+            };
+
+            xhr.open('GET', `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=9b8fec683929467eb39aecce10018a17`, true);
+            xhr.send(null);
+        }
+
+        function renderUi(response) {
+            console.log(response);
+            document.getElementById('headlines').innerText = response.articles[0].title;
+            document.getElementById('description').innerText = response.articles[0].description;
+            document.getElementById('urlToImage').src = response.articles[0].urlToImage;
+
+        }
+        getNewsData();
+
+        function getWeatherData() {
+            var xhr = new XMLHttpRequest();
+            let city = document.getElementById("city").value;
+            console.log(city);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    let response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    document.getElementById('location').innerText = response.name;
+                    document.getElementById('temp').innerText = response.main.temp;
+                    document.getElementById('weatherdescription').innerText = response.weather[0].description;
+                    document.getElementById('lati').innerText = response.coord.lat;
+                    document.getElementById('longi').innerText = response.coord.lon;
+                    document.getElementById('visibility').innerText = response.visibility;
+                    document.getElementById('windspeed').innerText = response.wind.speed;
+                    document.getElementById('humidity').innerText = response.main.humidity;
+                }
+            };
+
+            xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=5f2354cbd9e476809ce33c353210a4d0', true);
+            xhr.send(null);
+        }
+
+
+        function getCityNews() {
+            var xhr = new XMLHttpRequest();
+            let city = document.getElementById("city").value;
+            console.log(city);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    let place = JSON.parse(xhr.responseText);
+                    console.log(place);
+                    document.getElementById('head1').innerText = place.articles[1].title;
+                    document.getElementById('linkurl1').href = place.articles[1].url;
+                    document.getElementById('imageurl1').src = place.articles[1].urlToImage;
+                    document.getElementById('head22').innerText = place.articles[3].title;
+                    document.getElementById('linkurl22').href = place.articles[3].url;
+                    document.getElementById('imageurl22').src = place.articles[3].urlToImage;
+
+                }
+            };
+
+            xhr.open('GET', `https://newsapi.org/v2/everything?q=${city}&apiKey=9b8fec683929467eb39aecce10018a17`, true);
+            xhr.send(null);
+        }
+        getCityNews();
+
+
+        function getTopicData() {
+            var xhr = new XMLHttpRequest();
+            let topic = document.getElementById("topic").value;
+            console.log(topic);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    let topicdata = JSON.parse(xhr.responseText);
+                    console.log(topicdata);
+                    document.getElementById('topictitle').innerText = topicdata.articles[0].title;
+                    document.getElementById('topicdescription').innerText = topicdata.articles[0].description;
+                    document.getElementById('topicimage').src = topicdata.articles[0].urlToImage;
+                    document.getElementById('topictitle1').innerText = topicdata.articles[1].title;
+                    document.getElementById('topicdescription1').innerText = topicdata.articles[1].description;
+                    document.getElementById('topicimage1').src = topicdata.articles[1].urlToImage;
+                    document.getElementById('topictitle2').innerText = topicdata.articles[2].title;
+                    document.getElementById('topicdescription2').innerText = topicdata.articles[2].description;
+                    document.getElementById('topicimage2').src = topicdata.articles[2].urlToImage;
+                    document.getElementById('topictitle3').innerText = topicdata.articles[3].title;
+                    document.getElementById('topicdescription3').innerText = topicdata.articles[3].description;
+                    document.getElementById('topicimage3').src = topicdata.articles[3].urlToImage;
+                    document.getElementById('topictitle4').innerText = topicdata.articles[4].title;
+                    document.getElementById('topicdescription4').innerText = topicdata.articles[4].description;
+                    document.getElementById('topicimage4').src = topicdata.articles[4].urlToImage;
+                    document.getElementById('topictitle5').innerText = topicdata.articles[9].title;
+                    document.getElementById('topicdescription5').innerText = topicdata.articles[9].description;
+                    document.getElementById('topicimage5').src = topicdata.articles[9].urlToImage;
+                }
+            };
+
+            xhr.open('GET', `https://newsapi.org/v2/everything?q=${topic}&apiKey=9b8fec683929467eb39aecce10018a17`, true);
+            xhr.send(null);
+        }
+        getTopicData();
+
+
+
+
+
+
+
+
+    </script>
+
+    <!--javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
